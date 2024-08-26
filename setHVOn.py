@@ -27,6 +27,6 @@ print("PMT1")
 
 while(np.amax(np.abs(vset-vmon)) > tolerance):
     vmon = c.readParam("VMON")
-    p += "{:.1f}".format(vmon)
+    p = "{:.1f}".format(vmon)
     print(p)
     sleep(1)

@@ -18,7 +18,7 @@ c = CAENHV(dev)
 tolerance = 1 # V
 
 vset=c.readParam("VSET")
-c.setOff(ch)
+c.setOff()
     
 vset = 0
 vmon = 9999
@@ -28,6 +28,6 @@ print("PMT1")
 
 while(np.amax(np.abs(vset-vmon)) > tolerance):
     vmon = c.readParam("VMON")
-    p = "{:.1f}\t".format(vmon)
+    p = "{:.1f}".format(vmon)
     print(p)
     sleep(1)

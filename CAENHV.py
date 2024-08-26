@@ -36,7 +36,8 @@ class CAENHV:
             cmd = '$CMD:MON,PAR:{}\r\n'.format(param)
             self.s.write(cmd.encode('ascii'))
             answ = self.s.readline()
-            return float(answ.decode().split(":")[3].split("\r")[0])
+            #print(answ)
+            return float(answ.decode().split(":")[2].split("\r")[0])
         else:
             print("ERROR: Read {} not implemented".format(param))
         
