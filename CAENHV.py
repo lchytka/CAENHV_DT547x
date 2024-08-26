@@ -11,7 +11,7 @@ Control of CAEN DT547x
 import serial
 
 class CAENHV:
-    def __init__(self, dev="/dev/ttyUSB0"):
+    def __init__(self, dev="/dev/ttyACM0"):
         self.s = serial.Serial(dev,9600,timeout=1)
     
     def __del__(self):
@@ -21,11 +21,11 @@ class CAENHV:
         if param in {"VSET", "ISET", "RUP", "RDW", "MAXV", "IMAX"}:
             match param:
                 case "VSET":
-                    cmd = '$BD:00,CMD:SET,PAR:{},VAL:{:.1f}\r\n'.format(param,val)
+                    cmd = '$CMD:SET,PAR:{},VAL:{:.1f}\r\n'.format(param,val)
                 case "ISET":
-                    cmd = '$BD:00,CMD:SET,PAR:{},VAL:{:.2f}\r\n'.format(param,val)
+                    cmd = '$CMD:SET,PAR:{},VAL:{:.2f}\r\n'.format(param,val)
                 case _:
-                    cmd = '$BD:00,CMD:SET,PAR:{},VAL:{}\r\n'.format(param,val)
+                    cmd = '$CMD:SET,PAR:{},VAL:{}\r\n'.format(param,val)
             self.s.write(cmd.encode('ascii'))
             self.s.readline()
         else:
@@ -33,7 +33,7 @@ class CAENHV:
             
     def readParam(self,param):
         if param in {"VSET", "ISET", "RUP", "RDW", "MAXV", "IMAX", "IMON", "VMON"}:
-            cmd = '$BD:00,CMD:MON,PAR:{}\r\n'.format(param)
+            cmd = '$CMD:MON,PAR:{}\r\n'.format(param)
             self.s.write(cmd.encode('ascii'))
             answ = self.s.readline()
             return float(answ.decode().split(":")[3].split("\r")[0])
@@ -49,12 +49,12 @@ class CAENHV:
         print("Vmon: {:.1f}".format(self.readParam("VMON")))
         
     def setOn(self):
-        cmd = '$BD:00,CMD:SET,PAR:ON\r\n'
+        cmd = '$CMD:SET,PAR:ON\r\n'
         self.s.write(cmd.encode("ascii"))
         self.s.readline()
         
     def setOff(self):
-        cmd = '$BD:00,CMD:SET,PAR:OFF\r\n'
+        cmd = '$CMD:SET,PAR:OFF\r\n'
         self.s.write(cmd.encode("ascii"))
         self.s.readline()
         

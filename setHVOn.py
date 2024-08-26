@@ -12,7 +12,7 @@ from CAENHV import CAENHV
 import numpy as np
 from time import sleep
 
-dev = "/dev/ttyUSB1"
+dev = "/dev/ttyACM0"
 c = CAENHV(dev)
 
 tolerance = 1 # V

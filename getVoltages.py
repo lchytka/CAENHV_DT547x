@@ -10,7 +10,7 @@ Control of CAEN DT547x -- getVoltages
 
 from CAENHV import CAENHV
 
-dev = "/dev/ttyUSB1"
+dev = "/dev/ttyACM0"
 c = CAENHV(dev)
 
 c.readVolt()
