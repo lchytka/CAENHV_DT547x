@@ -46,7 +46,7 @@ class CAENHV:
         self.readParam("VSET")
         
     def readVolt(self):
-        print("Vmon: {:.1f}".format(ch+1,self.readParam("VMON")))
+        print("Vmon: {:.1f}".format(self.readParam("VMON")))
         
     def setOn(self):
         cmd = '$BD:00,CMD:SET,PAR:ON\r\n'
